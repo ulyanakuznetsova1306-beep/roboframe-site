@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Робофрейм — брендбук v0.2 · Каркас</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --graphite:#15181C; --graphite2:#22272E; --steel:#5B636D; --concrete:#ECEDE9; --concrete2:#DADCD6;
+  --white:#FFFFFF; --signal:#C8F135; --mute:#A3ABB5;
+  --sans:'Manrope','Helvetica Neue',Arial,sans-serif;
+  --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+}
+@page{size:297mm 210mm;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;background:#9aa0a6;font-family:var(--sans);color:var(--graphite);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:297mm;height:210mm;padding:13mm 16mm 11mm;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;background:var(--concrete);margin:8mm auto;
+  page-break-after:always;break-after:page;font-size:10.5pt;line-height:1.5}
+.page.dark{background:var(--graphite);color:var(--white)}
+.page.night{background:#0C0E11;color:var(--white)}
+@media print{html,body{background:none}.page{margin:0}.hint{display:none}}
+.hint{font-family:var(--mono);font-size:9pt;color:#15181C;text-align:center;padding:10px 16px 0}
+.top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7.5pt;letter-spacing:.08em;
+  color:var(--steel);margin-bottom:7mm;text-transform:uppercase}
+.dark .top,.night .top{color:var(--mute)}
+h1{font-size:25pt;font-weight:800;line-height:1.1;margin:0 0 6mm}
+h2{font-size:13pt;font-weight:800;line-height:1.25;margin:0 0 2mm}
+p{margin:0}
+.lab{font-family:var(--mono);font-size:7.5pt;letter-spacing:.08em;color:var(--steel);text-transform:uppercase}
+.dark .lab,.night .lab{color:var(--mute)}
+.mut{color:var(--steel)} .dark .mut,.night .mut{color:var(--mute)}
+.mono{font-family:var(--mono)}
+.sm{font-size:9pt;line-height:1.45}
+.grow{flex:1 1 0;min-height:0}
+.row{display:flex;gap:6mm}
+.col{display:flex;flex-direction:column;gap:3mm}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5mm}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5mm}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5mm}
+.card{background:var(--white);padding:5mm;display:flex;flex-direction:column;gap:2.5mm}
+.dark .card{background:var(--graphite2)}
+.center{display:flex;align-items:center;justify-content:center}
+.bg-g{background:var(--graphite);color:var(--white)}
+.bg-w{background:var(--white);color:var(--graphite)}
+.bg-c{background:var(--concrete2);color:var(--graphite)}
+.bg-s{background:var(--signal);color:var(--graphite)}
+/* знак и блок */
+.mark{display:block;height:1em;width:1em;color:inherit;--dot:currentColor}
+.bg-g .mark,.dark .mark,.night .mark,.acc{--dot:var(--signal)}
+.bg-w .mark,.bg-c .mark,.bg-s .mark{--dot:currentColor}
+.lock{display:flex;align-items:center;gap:.48em;font-weight:800;letter-spacing:.03em;line-height:1;white-space:nowrap}
+.lock .mark{height:1.84em;width:1.84em;flex:none}
+.lock.v{flex-direction:column;gap:.55em}
+.lock.v .mark{height:2.6em;width:2.6em}
+.sq{display:inline-block;width:3mm;height:3mm;background:var(--signal);outline:.25mm solid var(--graphite);flex:none;margin-top:1.4mm}
+.li{display:flex;gap:2.5mm;align-items:flex-start}
+.no{position:relative}
+.no:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:.5mm solid #D9361E;transform:rotate(-18deg)}
+table{border-collapse:collapse;width:100%;font-size:9pt}
+td,th{text-align:left;padding:2.2mm 2mm;border-top:.25mm solid var(--concrete2);vertical-align:top}
+th{font-family:var(--mono);font-size:7.5pt;letter-spacing:.06em;color:var(--steel);font-weight:500;text-transform:uppercase}
+.foot{margin-top:auto;padding-top:4mm;display:flex;justify-content:space-between;font-family:var(--mono);font-size:7.5pt;color:var(--steel)}
+.dark .foot,.night .foot{color:var(--mute)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 100 100">
+    <rect x="15" y="11" width="70" height="78" fill="none" stroke="currentColor" stroke-width="10"/><path d="M50 11V89M15 37H85M15 63H85" fill="none" stroke="currentColor" stroke-width="10"/>
+    <rect x="55" y="42" width="25" height="16" fill="var(--dot,currentColor)"/>
+  </symbol>
+</svg>
+
+<div class="hint">Чтобы получить PDF: Файл → Напечатать → «Сохранить как PDF», ориентация альбомная, поля «нет», фон включён.</div>
+
+<!-- 1 обложка -->
+<section class="page dark">
+  <div class="top"><span>Брендбук · версия 0.2 · знак «Каркас»</span><span>Ноябрь 2026</span></div>
+  <div class="grow col" style="justify-content:center;gap:9mm">
+    <div class="lock" style="font-size:54pt"><svg class="mark" role="img" aria-label="Знак Робофрейм"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div>
+    <div class="mono" style="font-size:12pt;letter-spacing:.14em;color:var(--signal)">РОБОТИЗИРОВАННЫЙ ПОДРЯДЧИК</div>
+  </div>
+  <div class="foot"><span>Фирменный стиль: знак, цвет, шрифт, носители, тон</span><span>01</span></div>
+</section>
+
+<!-- 2 содержание -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Содержание</span></div>
+  <h1>Что внутри</h1>
+  <div class="g2 grow" style="align-content:start">
+    <table>
+      <tr><td class="mono">03</td><td>О бренде: кто мы и что обещаем</td></tr>
+      <tr><td class="mono">04</td><td>Идея знака</td></tr>
+      <tr><td class="mono">05</td><td>Построение знака и логотипа</td></tr>
+      <tr><td class="mono">06</td><td>Версии логотипа</td></tr>
+      <tr><td class="mono">07</td><td>Охранное поле и минимальный размер</td></tr>
+      <tr><td class="mono">08</td><td>Как нельзя</td></tr>
+      <tr><td class="mono">09</td><td>Цвет</td></tr>
+    </table>
+    <table>
+      <tr><td class="mono">10</td><td>Шрифты</td></tr>
+      <tr><td class="mono">11</td><td>Графические приёмы</td></tr>
+      <tr><td class="mono">12</td><td>Носители</td></tr>
+      <tr><td class="mono">13</td><td>Ночной режим для промо</td></tr>
+      <tr><td class="mono">14</td><td>Тон голоса</td></tr>
+      <tr><td class="mono">15</td><td>На чём основаны решения</td></tr>
+      <tr><td class="mono">16</td><td>Другие варианты знака и что осталось сделать</td></tr>
+    </table>
+  </div>
+  <div class="card sm" style="background:var(--graphite);color:#fff">Это рабочая версия для обсуждения. Знак не проверен на схожесть с зарегистрированными товарными знаками, цвета для печати не подобраны по цветопробе. Список открытых вопросов — на последней странице.</div>
+  <div class="foot"><span>Робофрейм</span><span>02</span></div>
+</section>
+
+<!-- 3 о бренде -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>О бренде</span></div>
+  <div class="row grow">
+    <div class="col" style="flex:1.1 1 0;gap:6mm">
+      <h1 style="margin:0">Результат в допуске.<br>Не робот, не аренда,<br>не машино-смена.</h1>
+      <p>Робофрейм — российская технологическая компания, которая выполняет физические работы с помощью промышленных роботов и инженерно-операторской команды. Компания работает как подрядчик или субподрядчик и отвечает за согласованный результат.</p>
+      <p>Первый рынок — роботизированная внутренняя отделка для девелоперов и генподрядчиков Москвы и области. Стартовая операция — окраска стен. В перспективе — другие направления физической автоматизации, включая гражданские беспилотные системы.</p>
+      <div class="card sm" style="margin-top:auto"><span class="lab">Главное правило</span>Это один корпоративный бренд. Он не должен выглядеть ни как марка малярного оборудования, ни как производитель дронов.</div>
+    </div>
+    <div class="col" style="flex:1 1 0;gap:4mm">
+      <span class="lab">Характер</span>
+      <div class="g2" style="gap:4mm">
+        <div class="card"><h2>Компетентный</h2><p class="sm mut">Говорит цифрами, сроками и актами.</p></div>
+        <div class="card"><h2>Точный</h2><p class="sm mut">Прямые углы, сетка, ничего лишнего.</p></div>
+        <div class="card"><h2>Спокойный</h2><p class="sm mut">Без «революций» и восклицательных знаков.</p></div>
+        <div class="card"><h2>Заметный</h2><p class="sm mut">Один яркий сигнал на тёмном — видно издалека.</p></div>
+      </div>
+      <span class="lab" style="margin-top:3mm">Для кого</span>
+      <div class="card sm"><p><b>Девелоперы и генподрядчики.</b> Осторожные заказчики, которые впервые пускают робота на объект. Им важны срок, качество и кто отвечает, если что-то пойдёт не так.</p></div>
+      <div class="card sm"><p><b>Инженеры и операторы.</b> Будущая команда. Бренд должен выглядеть как место, где делают настоящую технику, а не презентации.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Робофрейм</span><span>03</span></div>
+</section>
+
+<!-- 4 идея знака -->
+<section class="page dark">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Идея знака</span></div>
+  <div class="row grow" style="align-items:center;gap:14mm">
+    <div class="center" style="flex:1 1 0"><svg class="mark" style="font-size:88mm" role="img" aria-label="Знак: каркас дома с одной залитой ячейкой"><use href="#m"/></svg></div>
+    <div class="col" style="flex:1 1 0;gap:7mm">
+      <h1 style="margin:0">Каркас</h1>
+      <div class="col" style="gap:1.5mm;border-top:.25mm solid #3A414A;padding-top:3mm"><h2>Колонны и перекрытия</h2><p class="mut">Разрез здания — язык, на котором говорит застройщик. И буквально «фрейм»: несущий каркас.</p></div>
+      <div class="col" style="gap:1.5mm;border-top:.25mm solid #3A414A;padding-top:3mm"><h2>Сданная ячейка</h2><p class="mut">Одно помещение залито сигнальным: работа принята. Заказчик покупает именно это.</p></div>
+      <div class="col" style="gap:1.5mm;border-top:.25mm solid #3A414A;padding-top:3mm"><h2>Пустые ячейки</h2><p class="mut">Фронт работ: всё, что ещё предстоит сделать и сдать. Знак легко превращается в схему прогресса.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Знак показывает результат, а не технику: чем выполнена работа, объясняет подпись</span><span>04</span></div>
+</section>
+
+<!-- 5 построение -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Построение</span></div>
+  <h1>Построение знака и логотипа</h1>
+  <div class="row grow">
+    <div class="card" style="flex:1 1 0;align-items:center;justify-content:center">
+      <svg viewBox="-8 -8 116 116" style="width:92mm;height:92mm" role="img" aria-label="Знак «Каркас» на модульной сетке 100 на 100">
+        <g stroke="#DADCD6" stroke-width=".3">
+          <path d="M0 0H100M0 10H100M0 20H100M0 30H100M0 40H100M0 50H100M0 60H100M0 70H100M0 80H100M0 90H100M0 100H100"/>
+          <path d="M0 0V100M10 0V100M20 0V100M30 0V100M40 0V100M50 0V100M60 0V100M70 0V100M80 0V100M90 0V100M100 0V100"/>
+        </g>
+        <rect x="15" y="11" width="70" height="78" fill="none" stroke="#15181C" stroke-width="10"/><path d="M50 11V89M15 37H85M15 63H85" fill="none" stroke="#15181C" stroke-width="10"/><rect x="55" y="42" width="25" height="16" fill="#C8F135" stroke="#15181C" stroke-width=".4"/>
+        <g font-family="monospace" font-size="3.2" fill="#5B636D"><text x="0" y="-3">0</text><text x="94" y="-3">100</text></g>
+      </svg>
+    </div>
+    <div class="col" style="flex:1 1 0;gap:4mm">
+      <table>
+        <tr><th>Элемент</th><th>Размер в модулях</th></tr>
+        <tr><td>Поле знака</td><td class="mono">100 × 100</td></tr>
+        <tr><td>Контур: внешний размер</td><td class="mono">80 × 88</td></tr>
+        <tr><td>Толщина всех линий</td><td class="mono">10</td></tr>
+        <tr><td>Сетка</td><td class="mono">2 колонки × 3 этажа</td></tr>
+        <tr><td>Ячейка: внутренний размер</td><td class="mono">25 × 16</td></tr>
+        <tr><td>Сигнальная ячейка</td><td class="mono">Средний этаж, правая</td></tr>
+        <tr><td>Углы</td><td class="mono">Прямые, без скруглений</td></tr>
+      </table>
+      <div class="card" style="gap:4mm">
+        <span class="lab">Логотип = знак + название</span>
+        <div class="lock" style="font-size:22pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div>
+        <p class="sm mut">Название: Manrope ExtraBold, прописные, разрядка 3 %. Высота знака равна 1,84 кегля названия, расстояние между знаком и названием — 0,48 кегля. Название выравнивается по центру знака.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Знак не перерисовывать: брать только из исходного файла</span><span>05</span></div>
+</section>
+
+<!-- 6 версии -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Версии логотипа</span></div>
+  <h1>Версии логотипа</h1>
+  <div class="g3 grow" style="grid-template-rows:1fr 1fr">
+    <div class="bg-g center" style="position:relative"><div class="lock" style="font-size:19pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div></div>
+    <div class="bg-w center"><div class="lock" style="font-size:19pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div></div>
+    <div class="bg-s center"><div class="lock" style="font-size:19pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div></div>
+    <div class="bg-g center"><div class="lock v" style="font-size:15pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div></div>
+    <div class="bg-c center"><svg class="mark" style="font-size:34mm" aria-hidden="true"><use href="#m"/></svg></div>
+    <div class="bg-w center"><div class="lock" style="font-size:19pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>ROBOFRAME</span></div></div>
+  </div>
+  <div class="g3 sm mut" style="margin-top:4mm">
+    <p><b style="color:var(--graphite)">Основная</b> — горизонтальная на графите, точка сигнального цвета. Вертикальная — для узких форматов.</p>
+    <p><b style="color:var(--graphite)">На светлом и на сигнальном</b> знак целиком графитовый: сигнальная ячейка на светлом теряется.</p>
+    <p><b style="color:var(--graphite)">Только знак</b> — аватар, значок приложения, шильд. Латинская версия — для зарубежных материалов.</p>
+  </div>
+  <div class="foot"><span>Сигнальная точка — только на тёмном фоне</span><span>06</span></div>
+</section>
+
+<!-- 7 охранное поле -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Охранное поле и размеры</span></div>
+  <h1>Охранное поле и минимальный размер</h1>
+  <div class="row grow">
+    <div class="card center" style="flex:1.3 1 0">
+      <div style="padding:13.25mm;border:.3mm dashed var(--steel);position:relative">
+        <div class="lock" style="font-size:28pt;outline:.2mm solid #DADCD6"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div>
+        <span class="mono mut" style="position:absolute;left:2mm;top:1mm;font-size:7pt">x</span>
+      </div>
+      <p class="sm mut" style="text-align:center">x = половина высоты знака. Внутрь пунктира не заходят текст, другие логотипы и край формата.</p>
+    </div>
+    <div class="col" style="flex:1 1 0;gap:4mm">
+      <div class="card">
+        <span class="lab">Минимальный размер</span>
+        <div class="row" style="align-items:flex-end;gap:8mm">
+          <div class="col" style="align-items:flex-start;gap:2mm"><svg class="mark" style="font-size:16px" aria-hidden="true"><use href="#m"/></svg><span class="mono sm mut">знак<br>16 px / 5 мм</span></div>
+          <div class="col" style="align-items:flex-start;gap:2mm"><div class="lock" style="font-size:8.7px"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div><span class="mono sm mut">логотип: знак<br>16 px / 5 мм</span></div>
+        </div>
+        <p class="sm mut">Меньше не использовать: ячейки заплывают.</p>
+      </div>
+      <div class="card">
+        <span class="lab">Рядом с логотипом заказчика</span>
+        <p class="sm">Логотипы ставятся на одной линии, одинаковой высоты, между ними расстояние не меньше двух x. Разделитель — тонкая вертикальная линия или просто воздух.</p>
+      </div>
+      <div class="card">
+        <span class="lab">Размещение</span>
+        <p class="sm">На обложках и слайдах — левый верхний угол. На объекте и на технике — так, чтобы знак был виден с 10 метров.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Робофрейм</span><span>07</span></div>
+</section>
+
+<!-- 8 нельзя -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Как нельзя</span></div>
+  <h1>Как нельзя</h1>
+  <div class="g4 grow" style="grid-template-rows:1fr 1fr">
+    <div class="card center"><div class="no"><svg class="mark" style="font-size:24mm;transform:scaleX(1.5)" aria-hidden="true"><use href="#m"/></svg></div><p class="sm mut">Растягивать и сжимать</p></div>
+    <div class="card center"><div class="no"><svg class="mark" style="font-size:24mm;transform:rotate(45deg)" aria-hidden="true"><use href="#m"/></svg></div><p class="sm mut">Поворачивать</p></div>
+    <div class="card center"><div class="no"><svg viewBox="0 0 100 100" style="width:24mm;height:24mm" aria-hidden="true"><rect x="15" y="11" width="70" height="78" fill="none" stroke="#15181C" stroke-width="10"/><path d="M50 11V89M15 37H85M15 63H85" fill="none" stroke="#15181C" stroke-width="10"/><rect x="55" y="42" width="25" height="16" fill="#15181C"/><rect x="20" y="16" width="25" height="16" fill="#15181C"/><rect x="20" y="68" width="25" height="16" fill="#15181C"/></svg></div><p class="sm mut">Заливать больше одной ячейки</p></div>
+    <div class="card center"><div class="no"><svg viewBox="0 0 100 100" style="width:24mm;height:24mm" aria-hidden="true"><rect x="10" y="26" width="80" height="48" fill="none" stroke="#15181C" stroke-width="8"/><path d="M30 26V74M50 26V74M70 26V74M10 50H90" fill="none" stroke="#15181C" stroke-width="8"/><rect x="54" y="54" width="12" height="16" fill="#15181C"/></svg></div><p class="sm mut">Менять число этажей и секций</p></div>
+    <div class="card center"><div class="no"><svg class="mark" style="font-size:24mm;color:#D9361E;--dot:#2A4BFF" aria-hidden="true"><use href="#m"/></svg></div><p class="sm mut">Красить в другие цвета</p></div>
+    <div class="card center"><div class="no"><svg class="mark" style="font-size:24mm;color:var(--signal);--dot:var(--signal)" aria-hidden="true"><use href="#m"/></svg></div><p class="sm mut">Сигнальный знак на светлом</p></div>
+    <div class="card center"><div class="no"><svg class="mark" style="font-size:24mm;filter:drop-shadow(2mm 2mm 1.5mm rgba(0,0,0,.45))" aria-hidden="true"><use href="#m"/></svg></div><p class="sm mut">Тени, объём, градиенты</p></div>
+    <div class="card center"><div class="no"><div class="lock" style="font-size:11pt;font-weight:400;font-family:Georgia,serif;letter-spacing:0"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>Робофрейм</span></div></div><p class="sm mut">Менять шрифт и регистр названия</p></div>
+  </div>
+  <div class="foot"><span>И ещё: не сокращать название до «РФ»</span><span>08</span></div>
+</section>
+
+<!-- 9 цвет -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Цвет</span></div>
+  <h1>Цвет: тёмная база и один сигнал</h1>
+  <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4mm;height:62mm">
+    <div class="bg-g" style="padding:4mm;display:flex;flex-direction:column;justify-content:space-between"><span class="mono sm" style="color:var(--mute)">60 %</span><div><h2>Графит</h2><p class="mono sm">#15181C<br>RGB 21 24 28<br>CMYK 25 14 0 89</p></div></div>
+    <div style="background:var(--steel);color:#fff;padding:4mm;display:flex;flex-direction:column;justify-content:space-between"><span class="mono sm">5 %</span><div><h2>Сталь</h2><p class="mono sm">#5B636D<br>RGB 91 99 109<br>CMYK 17 9 0 57</p></div></div>
+    <div class="bg-c" style="padding:4mm;display:flex;flex-direction:column;justify-content:space-between"><span class="mono sm">20 %</span><div><h2>Бетон</h2><p class="mono sm">#ECEDE9 / #DADCD6<br>RGB 236 237 233<br>CMYK 0 0 2 7</p></div></div>
+    <div class="bg-w" style="padding:4mm;display:flex;flex-direction:column;justify-content:space-between"><span class="mono sm mut">10 %</span><div><h2>Белый</h2><p class="mono sm">#FFFFFF<br>RGB 255 255 255<br>CMYK 0 0 0 0</p></div></div>
+    <div class="bg-s" style="padding:4mm;display:flex;flex-direction:column;justify-content:space-between"><span class="mono sm">5–10 %</span><div><h2>Сигнал</h2><p class="mono sm">#C8F135<br>RGB 200 241 53<br>CMYK 17 0 78 5</p></div></div>
+  </div>
+  <div class="g3 grow" style="margin-top:5mm">
+    <div class="card sm"><span class="lab">Роли</span>
+      <p><b>Графит</b> — фон и текст. <b>Бетон и белый</b> — светлые фоны, документы. <b>Сталь</b> — подписи и линии. <b>Сигнал</b> — точка в знаке, статус «принято», корпус робота, одна кнопка на экране.</p></div>
+    <div class="card sm"><span class="lab">Правила сигнального</span>
+      <p>Только заливкой, на нём — только графитовый текст. Сигнальным не пишут по белому: не читается. Не больше 10 % площади макета, иначе он перестаёт быть сигналом.</p></div>
+    <div class="card sm"><span class="lab">Почему он</span>
+      <p>На стройке это цвет сигнальных жилетов: робот заметен и безопасен. В отчётах зелёный значит «принято». Оранжевый занят (девелоперы, спецтехника, инструмент), синий — у половины ИТ-компаний.</p></div>
+  </div>
+  <div class="foot"><span>CMYK — расчётные значения. Яркий сигнальный в CMYK тускнеет: для печати и окраски корпуса подобрать смесевую краску и RAL по образцу</span><span>09</span></div>
+</section>
+
+<!-- 10 шрифты -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Шрифты</span></div>
+  <h1>Шрифты</h1>
+  <div class="row grow">
+    <div class="card" style="flex:1.2 1 0;gap:5mm">
+      <span class="lab">Manrope · заголовки, название, текст</span>
+      <div style="font-size:40pt;font-weight:800;line-height:1.05">Принятый объём работ</div>
+      <div style="font-size:15pt;font-weight:700">Окраска стен: секция 2, этажи 5–12</div>
+      <p>Компания работает как подрядчик или субподрядчик и отвечает за согласованный результат. Заказчик покупает принятый объём работ, а не робота, аренду или машино-смену.</p>
+      <p class="sm mut" style="margin-top:auto">АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ<br>абвгдеёжзийклмнопрстуфхцчшщъыьэюя 0123456789</p>
+    </div>
+    <div class="col" style="flex:1 1 0;gap:4mm">
+      <div class="card" style="gap:4mm">
+        <span class="lab">JetBrains Mono · цифры и маркировка</span>
+        <div class="mono" style="font-size:14pt;letter-spacing:.04em">ОБЪЕКТ [НАЗВАНИЕ] · ЭТАЖ 7</div>
+        <p class="sm mut">Номера, даты, площади, статусы, подписи к схемам, шильды на технике. Только короткие строки, не абзацы.</p>
+      </div>
+      <table>
+        <tr><th>Уровень</th><th>Начертание</th><th>Кегль</th></tr>
+        <tr><td>Заголовок</td><td>Manrope 800</td><td class="mono">25–40 pt</td></tr>
+        <tr><td>Подзаголовок</td><td>Manrope 700–800</td><td class="mono">13–15 pt</td></tr>
+        <tr><td>Текст</td><td>Manrope 400</td><td class="mono">10–11 pt</td></tr>
+        <tr><td>Подпись</td><td>JetBrains Mono 500, прописные</td><td class="mono">7,5–9 pt</td></tr>
+      </table>
+      <p class="sm mut">Оба шрифта бесплатные (Google Fonts), с полной кириллицей. Если шрифт недоступен, например в почте, — Arial.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Заголовки — без точки в конце и без восклицательных знаков</span><span>10</span></div>
+</section>
+
+<!-- 11 графические приёмы -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Графические приёмы</span></div>
+  <h1>Графические приёмы</h1>
+  <div class="g3 grow">
+    <div class="col" style="gap:3mm">
+      <div class="bg-g grow" style="position:relative;padding:6mm">
+        <div style="position:absolute;inset:6mm;border:1.6mm solid #fff"></div>
+        <div style="position:absolute;left:50%;top:6mm;bottom:6mm;width:1.6mm;background:#fff;transform:translateX(-50%)"></div>
+        <div style="position:absolute;left:6mm;right:6mm;top:36%;height:1.6mm;background:#fff"></div>
+        <div style="position:absolute;left:6mm;right:6mm;top:64%;height:1.6mm;background:#fff"></div>
+        <div style="position:absolute;left:calc(50% + 2mm);right:9mm;top:calc(36% + 3mm);bottom:calc(36% + 1.4mm);background:var(--signal)"></div>
+        <div class="center" style="height:100%"><span class="lab">[ФОТО ОБЪЕКТА]</span></div>
+      </div>
+      <h2>Сетка каркаса</h2>
+      <p class="sm mut">Макет делится на ячейки, как разрез дома. Одна ячейка сигнальная — в ней главное: цифра, статус, срок. Остальные заняты фото и текстом или остаются пустыми.</p>
+    </div>
+    <div class="col" style="gap:3mm">
+      <div class="bg-w grow col" style="padding:6mm;justify-content:center;gap:4mm">
+        <div class="li"><span class="sq"></span><span class="mono">ПРИНЯТО</span></div>
+        <div class="li"><span class="sq" style="background:var(--graphite)"></span><span class="mono">В РАБОТЕ</span></div>
+        <div class="li"><span class="sq" style="background:none"></span><span class="mono">В ПЛАНЕ</span></div>
+      </div>
+      <h2>Точка — это статус</h2>
+      <p class="sm mut">Квадрат из знака работает как маркер списка и как индикатор. Сигнальный — принято, графитовый — в работе, пустой — в плане.</p>
+    </div>
+    <div class="col" style="gap:3mm">
+      <div class="grow" style="background-color:var(--graphite);background-image:linear-gradient(#262C34 .25mm,transparent .25mm),linear-gradient(90deg,#262C34 .25mm,transparent .25mm);background-size:8mm 8mm;padding:6mm;display:flex;align-items:flex-end">
+        <span class="mono sm" style="color:var(--signal)">ЭТАЖ [N] · СЕКЦИЯ [N]</span>
+      </div>
+      <h2>Сетка и маркировка</h2>
+      <p class="sm mut">Тонкая квадратная сетка как фон и строка моноширинным шрифтом как подпись. Отсылка к чертежу и телеметрии. Сетка едва заметна.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Фотографии: реальные объекты и техника, без стоковых роботов и рендеров «из будущего»</span><span>11</span></div>
+</section>
+
+<!-- 12 носители -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Носители</span></div>
+  <h1>Носители</h1>
+  <div class="row" style="height:74mm">
+    <div class="bg-g" style="flex:1.5 1 0;padding:7mm;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+      <svg class="mark" style="font-size:105mm;position:absolute;right:-24mm;bottom:-34mm;color:#22272E" aria-hidden="true"><use href="#m"/></svg>
+      <div class="lock" style="font-size:10pt;position:relative"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div>
+      <div style="position:relative;max-width:95mm"><div style="font-size:22pt;font-weight:800;line-height:1.1">Роботизированная отделка под ключ</div><p class="sm mut" style="margin-top:2mm">Предложение для [ЗАСТРОЙЩИК] · объект [НАЗВАНИЕ ЖК]</p></div>
+      <span class="lab" style="position:relative">Обложка презентации</span>
+    </div>
+    <div class="bg-w" style="flex:1 1 0;padding:6mm;display:flex;flex-direction:column;gap:3mm">
+      <div class="row" style="justify-content:space-between;align-items:center"><div class="lock" style="font-size:8.5pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div><span class="mono sm mut">№ [НОМЕР]</span></div>
+      <div style="font-size:14pt;font-weight:800;line-height:1.15">Акт приёмки выполненных работ</div>
+      <table class="mono" style="font-size:8pt">
+        <tr><td class="mut">Объект</td><td>[НАЗВАНИЕ ЖК]</td></tr>
+        <tr><td class="mut">Операция</td><td>Окраска стен</td></tr>
+        <tr><td class="mut">Объём</td><td>[ПЛОЩАДЬ] м²</td></tr>
+      </table>
+      <div class="li" style="margin-top:auto"><span class="sq"></span><span class="mono sm">ПРИНЯТО</span></div>
+    </div>
+  </div>
+  <div class="row grow" style="margin-top:5mm">
+    <div class="bg-s" style="flex:1.5 1 0;padding:6mm;display:flex;flex-direction:column;justify-content:space-between">
+      <div class="row" style="justify-content:space-between;align-items:center"><div class="lock" style="font-size:10pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div><span class="mono sm">ТАБЛИЧКА НА ЭТАЖЕ</span></div>
+      <div style="font-size:24pt;font-weight:800;line-height:1.05">На этаже работает робот</div>
+      <span class="mono sm">Оператор смены: [ИМЯ] · [ТЕЛЕФОН]</span>
+    </div>
+    <div class="col" style="flex:.5 1 0;gap:3mm">
+      <div class="bg-g center grow"><svg class="mark" style="font-size:16mm" aria-hidden="true"><use href="#m"/></svg></div>
+      <div class="bg-w grow" style="padding:4mm;display:flex;flex-direction:column;justify-content:space-between"><div><b class="sm">[ИМЯ ФАМИЛИЯ]</b><p class="sm mut">[Должность]</p></div><span class="mono" style="font-size:7pt">[телефон] · [почта]</span></div>
+    </div>
+    <div class="bg-c" style="flex:.5 1 0;padding:5mm;display:flex;flex-direction:column;justify-content:space-between">
+      <span class="lab">Шильд на корпусе</span>
+      <div class="bg-g" style="padding:3.5mm;display:flex;flex-direction:column;gap:2mm"><div class="lock" style="font-size:7pt"><svg class="mark" aria-hidden="true"><use href="#m"/></svg><span>РОБОФРЕЙМ</span></div><span class="mono" style="font-size:12pt;color:var(--signal)">RF-[НОМЕР]</span></div>
+      <p class="sm mut">Каждая машина с номером — единица парка.</p>
+    </div>
+  </div>
+  <div class="foot"><span>В квадратных скобках — места для ваших данных</span><span>12</span></div>
+</section>
+
+<!-- 13 ночной режим -->
+<section class="page night">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Ночной режим для промо</span></div>
+  <h1>Ночной режим: киберпанк в меру</h1>
+  <div class="row grow">
+    <div style="flex:1.5 1 0;position:relative;overflow:hidden;border:.25mm solid #262C34;background-color:#0F1215;background-image:linear-gradient(#1A1F25 .25mm,transparent .25mm),linear-gradient(90deg,#1A1F25 .25mm,transparent .25mm);background-size:10mm 10mm;padding:7mm;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="position:absolute;right:-22.5mm;top:-12.0mm;width:110mm;height:110mm;border-radius:50%;background:radial-gradient(circle,rgba(200,241,53,.22) 0%,rgba(200,241,53,.06) 40%,rgba(200,241,53,0) 70%)"></div>
+      <svg viewBox="0 0 100 100" style="position:absolute;right:13mm;top:13mm;width:60mm;height:60mm" aria-hidden="true"><rect x="15" y="11" width="70" height="78" fill="none" stroke="#2A3038" stroke-width="10"/><path d="M50 11V89M15 37H85M15 63H85" fill="none" stroke="#2A3038" stroke-width="10"/></svg>
+      <div style="position:absolute;right:25.0mm;top:38.2mm;width:15.0mm;height:9.6mm;background:var(--signal);box-shadow:0 0 5mm var(--signal),0 0 20mm rgba(200,241,53,.7)"></div>
+      <span class="lab" style="position:relative">Главный экран сайта · кадр ролика</span>
+      <div style="position:relative;max-width:100mm">
+        <p class="mono sm" style="color:var(--signal);letter-spacing:.1em">ЭТАЖ [N] · СТАТУС: В РАБОТЕ</p>
+        <div style="font-size:27pt;font-weight:800;line-height:1.05;margin-top:3mm">Пока город спит, этаж уже окрашен</div>
+        <p class="sm mut" style="margin-top:2mm">Пример заголовка, не утверждённый слоган.</p>
+      </div>
+    </div>
+    <div class="col" style="flex:1 1 0;gap:4mm">
+      <div class="card" style="background:#15181C"><span class="lab">Рецепт кадра</span><p class="sm">Сумерки или ночь, пустой бетонный этаж, лёгкая дымка. Робот маленький в большом пространстве и подсвечен снизу сигнальным цветом. В окнах — тёплые огни города.</p></div>
+      <div class="card grow" style="background:#15181C"><span class="lab">Берём</span>
+        <div class="li sm"><span class="sq" style="outline:none"></span>Один светящийся цвет</div>
+        <div class="li sm"><span class="sq" style="outline:none"></span>Темнота, дымка, масштаб</div>
+        <div class="li sm"><span class="sq" style="outline:none"></span>Сетки, координаты, моноширинный шрифт</div>
+        <span class="lab" style="margin-top:2mm">Не берём</span>
+        <p class="sm mut">Маджента и циан, дождь и разруха, глитч-эффекты, человекоподобные роботы и «восстание машин».</p>
+      </div>
+      <div class="card sm" style="background:var(--signal);color:var(--graphite)"><b>Где:</b> ролик, сайт, стенд, соцсети, наём. В презентации — только обложка. В актах, договорах и на табличках — никогда.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Ночной режим — способ показывать тот же стиль, а не отдельный стиль</span><span>13</span></div>
+</section>
+
+<!-- 14 тон голоса -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Тон голоса</span></div>
+  <h1>Тон голоса</h1>
+  <div class="g3" style="margin-bottom:5mm">
+    <div class="card"><h2>Результат вместо технологии</h2><p class="sm mut">Сначала что получит заказчик, потом как это сделано.</p></div>
+    <div class="card"><h2>Цифры вместо эпитетов</h2><p class="sm mut">Площадь, срок, отклонение. Если цифры нет — не заменять её словом «уникальный».</p></div>
+    <div class="card"><h2>Спокойно и по делу</h2><p class="sm mut">Короткие предложения, без восклицаний и обещаний «изменить отрасль».</p></div>
+  </div>
+  <div class="g2 grow">
+    <div class="card"><span class="lab">Так</span>
+      <div class="li"><span class="sq"></span><p>Сдаём [N] м² окраски за [N] смен. Отклонения — в акте.</p></div>
+      <div class="li"><span class="sq"></span><p>Вы принимаете объём работ, а не арендуете робота.</p></div>
+      <div class="li"><span class="sq"></span><p>За результат отвечаем мы: в договоре — срок и качество.</p></div>
+      <div class="li"><span class="sq"></span><p>Робот красит, оператор контролирует, инженер отвечает.</p></div>
+    </div>
+    <div class="card"><span class="lab">Не так</span>
+      <div class="li mut"><span class="sq" style="background:none"></span><p>Революция в строительстве!</p></div>
+      <div class="li mut"><span class="sq" style="background:none"></span><p>Роботы заменят маляров.</p></div>
+      <div class="li mut"><span class="sq" style="background:none"></span><p>Уникальные инновационные решения полного цикла.</p></div>
+      <div class="li mut"><span class="sq" style="background:none"></span><p>Искусственный интеллект будущего уже здесь.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>О людях на стройке — с уважением: робот снимает тяжёлую работу, а не «заменяет» человека</span><span>14</span></div>
+</section>
+
+<!-- 15 исследования -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Обоснование</span></div>
+  <h1>На чём основаны решения</h1>
+  <table class="grow" style="font-size:8.6pt">
+    <tr><th style="width:27%">Исследование</th><th style="width:38%">Вывод</th><th>Решение в стиле</th></tr>
+    <tr><td>Henderson, Cote · 1998 · Journal of Marketing</td><td>Лучше узнают и оценивают знаки умеренной сложности.</td><td><b>Простая сетка и одна залитая ячейка.</b></td></tr>
+    <tr><td>Jiang и др. · 2016 · Journal of Consumer Research</td><td>Угловатые формы говорят о твёрдости и долговечности, круглые — о мягкости.</td><td><b>Только прямые углы, без скруглений.</b></td></tr>
+    <tr><td>Labrecque, Milne · 2012 · J. of the Academy of Marketing Science</td><td>Цвет задаёт характер бренда; насыщенность добавляет энергии, тёмные тона — основательности.</td><td><b>Графит и один насыщенный акцент.</b></td></tr>
+    <tr><td>Fajardo, Zhang, Tsiros · 2016 · Journal of Consumer Research</td><td>Рамка при ощущении риска — защита, без риска — теснота.</td><td><b>Замкнутый контур здания работает как рамка: порядок и защита для осторожного заказчика.</b></td></tr>
+    <tr><td>Cian, Krishna, Elder · 2014 · Journal of Marketing Research</td><td>Намёк на движение в неподвижном знаке вовлекает сильнее.</td><td><b>Слабое место: знак статичный. Движение — в анимации: ячейки заливаются по очереди.</b></td></tr>
+    <tr><td>Luffarelli и др. · 2019 · Journal of Marketing Research</td><td>Логотипы, по которым понятно дело компании, оцениваются выше.</td><td><b>Видно стройку и сданный результат; робота объясняет подпись.</b></td></tr>
+    <tr><td>Hagtvedt · 2011 · Journal of Marketing</td><td>Незавершённые буквы — инновационно, но меньше доверия.</td><td><b>Буквы названия цельные и плотные.</b></td></tr>
+    <tr><td>Xu, Chen, Liu · 2017 · Marketing Letters</td><td>Прописные читаются как сила и авторитет.</td><td><b>Название прописными.</b></td></tr>
+  </table>
+  <div class="card sm" style="background:var(--graphite);color:#fff;margin-top:4mm">Оговорки. Эффекты измерены в основном на потребительских товарах, для закупщиков девелопера это гипотезы. Первые четыре источника сверены поиском (Fajardo — по пересказу), последние четыре приведены по памяти: перед публичным цитированием проверить авторов и год.</div>
+  <div class="foot"><span>Робофрейм</span><span>15</span></div>
+</section>
+
+<!-- 16 альтернативы и дальше -->
+<section class="page">
+  <div class="top"><span>Робофрейм · брендбук</span><span>Приложение</span></div>
+  <h1>Другие варианты знака и что осталось сделать</h1>
+  <div class="row grow">
+    <div class="col" style="flex:1 1 0;gap:4mm">
+      <div class="card" style="flex-direction:row;gap:5mm;align-items:center">
+        <svg viewBox="0 0 100 100" style="width:19mm;height:19mm;flex:none" role="img" aria-label="Г · Рука у стены"><path d="M88 8V92" fill="none" stroke="#15181C" stroke-width="10"/><rect x="8" y="80" width="34" height="12" fill="#15181C"/><path d="M25 80L42 36L72 50" fill="none" stroke="#15181C" stroke-width="12" stroke-linejoin="round"/><rect x="69" y="43" width="14" height="14" fill="#15181C"/></svg>
+        <div class="col" style="gap:1mm"><h2>Г · Рука у стены</h2><p class="sm mut">Самый понятный, но привязан к манипуляторам.</p></div>
+      </div>
+      <div class="card" style="flex-direction:row;gap:5mm;align-items:center">
+        <svg viewBox="0 0 100 100" style="width:19mm;height:19mm;flex:none" role="img" aria-label="Д · Робо-рамка"><rect x="46" y="2" width="8" height="14" fill="#15181C"/><rect x="17" y="23" width="66" height="60" fill="none" stroke="#15181C" stroke-width="14"/><rect x="31" y="44" width="13" height="13" fill="#15181C"/><rect x="56" y="44" width="13" height="13" fill="#15181C"/></svg>
+        <div class="col" style="gap:1mm"><h2>Д · Робо-рамка</h2><p class="sm mut">Рисует название буквально, но выглядит игрушечно.</p></div>
+      </div>
+      <div class="card" style="flex-direction:row;gap:5mm;align-items:center">
+        <svg viewBox="0 0 100 100" style="width:19mm;height:19mm;flex:none" role="img" aria-label="Ж · Дом в прицеле"><path d="M8 28V8H28M72 8H92V28M92 72V92H72M28 92H8V72" fill="none" stroke="#15181C" stroke-width="8"/><path d="M28 78V42H46V24H72V78Z" fill="#15181C"/><rect x="53" y="33" width="12" height="12" fill="#fff"/></svg>
+        <div class="col" style="gap:1mm"><h2>Ж · Дом в прицеле</h2><p class="sm mut">Стройка плюс техника, но читается как мониторинг.</p></div>
+      </div>
+      <p class="sm mut">Главный риск — робота не видно, а знак легко спутать с логотипом девелопера. Подпись «Роботизированный подрядчик» рядом со знаком обязательна всегда.</p>
+    </div>
+    <div class="card" style="flex:1 1 0">
+      <span class="lab">До утверждения</span>
+      <div class="li"><span class="sq" style="background:none"></span><p><b>Проверка на схожесть.</b> Поиск по базе товарных знаков, минимум классы 37 (строительство) и 42 (инженерные услуги). Сетки и окна — частый мотив у девелоперов и архитекторов.</p></div>
+      <div class="li"><span class="sq" style="background:none"></span><p><b>Проверка на людях.</b> Показать знак без подписи 5–7 представителям девелоперов: видят ли они стройку и сданный результат, не путают ли знак с логотипом застройщика.</p></div>
+      <div class="li"><span class="sq" style="background:none"></span><p><b>Чистовая отрисовка.</b> Дизайнеру довести название: межбуквенные расстояния, оптические поправки, исходники в векторе.</p></div>
+      <div class="li"><span class="sq" style="background:none"></span><p><b>Цвет в материале.</b> Подобрать смесевую краску и RAL для сигнального: печать, жилеты, корпус робота.</p></div>
+      <div class="li"><span class="sq" style="background:none"></span><p><b>Съёмка.</b> Реальный объект и техника в дневном и ночном режиме.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Версия 0.2 · черновик концепции</span><span>16</span></div>
+</section>
+
+</body>
+</html>
