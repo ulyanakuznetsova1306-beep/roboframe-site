@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Сайт Робофрейм</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Раскладка: чередование тёмных и светлых полос во всю ширину, контент в колонке 1200px; один сигнальный цвет на главном действии */
+:root{
+  --graphite:#15181C; --ink2:#22272E; --night:#0F1215; --line:#3A414A;
+  --steel:#5B636D; --mute:#A3ABB5; --soft:#D5D9DD;
+  --concrete:#ECEDE9; --concrete2:#DADCD6; --rule:#C9CCC6; --white:#FFFFFF;
+  --signal:#C8F135;
+  --sans:'Manrope','Helvetica Neue',Arial,sans-serif;
+  --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--concrete);color:var(--graphite);font-family:var(--sans);font-size:1rem;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--graphite)}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance;font-weight:800;line-height:1.08}
+h1{font-size:clamp(2.2rem,4.6vw,4rem)}
+h2{font-size:clamp(1.9rem,4vw,3rem)}
+h3{font-size:1.3rem;line-height:1.2}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+.light :focus-visible,.white :focus-visible,.stone :focus-visible,.sig :focus-visible{outline-color:var(--graphite)}
+.band{width:100%}
+.wrap{max-width:75rem;margin:0 auto;padding-block:5.5rem;padding-left:max(1.25rem,env(safe-area-inset-left,0px));padding-right:max(1.25rem,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:2.25rem}
+.dark{background:var(--graphite);color:var(--white)}
+.night{background-color:var(--night);background-image:linear-gradient(#1A1F25 1px,transparent 1px),linear-gradient(90deg,#1A1F25 1px,transparent 1px);background-size:3rem 3rem;color:var(--white)}
+.white{background:var(--white)}
+.stone{background:var(--concrete2)}
+.sig{background:var(--signal)}
+.lab{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+.dark .lab,.night .lab{color:var(--mute)}
+.sig .lab{color:var(--graphite)}
+.lead{font-size:1.15rem;color:var(--steel);max-width:40rem}
+.dark .lead,.night .lead{color:var(--soft)}
+.mut{color:var(--steel)} .dark .mut,.night .mut{color:var(--mute)}
+.btn{display:inline-flex;align-items:center;min-height:3rem;padding:.8rem 1.6rem;font:700 1rem var(--sans);text-decoration:none;border:0;cursor:pointer;background:var(--signal);color:var(--graphite);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:none;color:inherit;border:1px solid var(--steel)}
+.btn.ink{background:var(--graphite);color:var(--white)}
+.row{display:flex;flex-wrap:wrap;gap:.75rem}
+.split{display:flex;flex-wrap:wrap;gap:2.5rem}
+.split>*{flex:1 1 22rem;min-width:0;display:flex;flex-direction:column;gap:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16.5rem,1fr));gap:1rem}
+.card{background:var(--white);padding:1.6rem;display:flex;flex-direction:column;gap:.6rem;min-width:0}
+.stone .card,.light .card{background:var(--white)}
+.dark .card{background:var(--ink2)}
+.tick{display:flex;gap:.85rem;align-items:flex-start}
+.tick::before{content:"";width:.75rem;height:.75rem;background:var(--signal);outline:1px solid var(--graphite);margin-top:.45rem;flex:none}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem}
+.more{font-weight:700;padding:.7rem 0}
+/* шапка */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--graphite);color:var(--white)}
+header .in{max-width:75rem;margin:0 auto;padding-block:.75rem;padding-left:max(1.25rem,env(safe-area-inset-left,0px));padding-right:max(1.25rem,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.75rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:800;letter-spacing:.03em;font-size:1.1rem;min-height:2.75rem}
+.logo svg{width:2rem;height:2rem}
+nav{display:flex;flex-wrap:wrap;gap:0 1.5rem;margin-left:auto;font-weight:500;font-size:.95rem}
+nav a{text-decoration:none;padding:.7rem 0;border-bottom:2px solid transparent}
+nav a[aria-current="page"]{border-bottom-color:var(--signal)}
+nav a:hover{border-bottom-color:var(--steel)}
+@media (max-width:40rem){header{position:static}header .btn{display:none}nav{margin-left:0;gap:0 1.1rem;font-size:.9rem}}
+/* первый экран */
+.hero .wrap{padding-block:4.5rem 3.5rem}
+.hero .split{align-items:center}
+.scene{background:#0C0E11;border:1px solid #262C34;display:flex;flex-direction:column}
+.scene svg{display:block;width:100%;height:auto}
+.scene .bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;padding:.7rem 1rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;border-top:1px solid #262C34;color:var(--mute)}
+.scene .bar b{color:var(--signal);font-weight:500}
+#tool{filter:drop-shadow(0 0 10px var(--signal))}
+.plates{max-width:75rem;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(16.5rem,1fr))}
+.plates>*{padding:1.6rem max(1.25rem,env(safe-area-inset-right,0px)) 1.6rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:.4rem}
+/* шаги */
+.step{border-top:3px solid var(--steel);padding-top:1.1rem;display:flex;flex-direction:column;gap:.6rem}
+.step:first-child{border-top-color:var(--signal)}
+.step .n{font-family:var(--mono);font-size:.85rem;color:var(--mute)}
+.step:first-child .n{color:var(--signal)}
+.ph{min-height:13rem;background:var(--graphite);color:var(--mute);display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em}
+.media{padding:0;gap:0}
+.media .tx{padding:1.5rem;display:flex;flex-direction:column;gap:.5rem}
+.st{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.75rem}
+.st::before{content:"";width:.65rem;height:.65rem;background:var(--signal);outline:1px solid var(--graphite)}
+.st.w::before{background:var(--graphite)}
+.st.p::before{background:none}
+.news{border-top:1px solid var(--graphite);padding-top:1rem;display:flex;flex-direction:column;gap:.5rem}
+/* таблица, вопросы */
+.tbl{overflow-x:auto;background:var(--white)}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.95rem}
+th,td{text-align:left;padding:.85rem 1rem;border-bottom:1px solid var(--concrete2);vertical-align:top}
+th{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);font-weight:500}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+details{background:var(--white);padding:0 1.5rem}
+details+details{margin-top:.5rem}
+summary{cursor:pointer;font-weight:800;font-size:1.1rem;padding:1.2rem 0;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::after{content:"+";font-family:var(--mono);font-weight:400}
+details[open] summary::after{content:"−"}
+details p{padding-bottom:1.3rem;color:var(--steel);max-width:44rem}
+.day{display:grid;grid-template-columns:auto 1fr;gap:.9rem 1.5rem;align-items:baseline}
+.day dt{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--steel)}
+.day dd{margin:0}
+/* форма */
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1rem}
+label{display:flex;flex-direction:column;gap:.35rem;font-size:.82rem;color:var(--mute)}
+input,textarea{font:inherit;font-size:1rem;padding:.8rem .9rem;background:var(--ink2);border:1px solid var(--steel);color:var(--white);width:100%;color-scheme:dark}
+.full{grid-column:1/-1}
+#sent{background:var(--ink2);border-left:4px solid var(--signal);padding:1rem 1.25rem}
+footer{background:#0C0E11;color:var(--mute);font-size:.9rem}
+footer .wrap{padding-block:2.5rem;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center}
+footer nav{margin:0}
+.view{animation:in .35s ease-out}
+@keyframes in{from{transform:translateY(10px)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view{animation:none}.btn{transition:none}}
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mk" viewBox="0 0 100 100"><path d="M88 8V92" fill="none" stroke="currentColor" stroke-width="10"/><rect x="8" y="80" width="34" height="12" fill="currentColor"/><path d="M25 80L42 36L72 50" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/><rect x="69" y="43" width="14" height="14" fill="#C8F135"/></symbol>
+</svg>
+
+<header>
+  <div class="in">
+    <a class="logo" href="#glavnaya"><svg role="img" aria-label="Робофрейм"><use href="#mk"/></svg>РОБОФРЕЙМ</a>
+    <nav aria-label="Основное меню">
+      <a href="#glavnaya" data-nav="glavnaya">Главная</a>
+      <a href="#zastroyshchikam" data-nav="zastroyshchikam">Застройщикам</a>
+      <a href="#tehnologiya" data-nav="tehnologiya">Технология</a>
+      <a href="#kariera" data-nav="kariera">Карьера</a>
+    </nav>
+    <button class="btn" type="button" data-scroll="zayavka">Рассчитать объект</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ГЛАВНАЯ -->
+<div class="view" data-view="glavnaya">
+  <section class="band night hero">
+    <div class="wrap">
+      <div class="split">
+        <div style="flex:1.1 1 24rem;gap:1.5rem">
+          <span class="lab">Роботизированный подрядчик · Москва и область</span>
+          <h1>Отделку выполняют роботы. За результат отвечаем мы</h1>
+          <p class="lead">Вы принимаете объём работ по акту, а не арендуете технику. Стартовая операция — окраска стен.</p>
+          <div class="row"><button class="btn" type="button" data-scroll="zayavka">Рассчитать объект</button><button class="btn ghost" type="button" data-scroll="shagi">Как это работает</button></div>
+        </div>
+        <div class="scene" style="gap:0">
+          <svg viewBox="0 0 600 392" role="img" aria-label="Демонстрация: рука робота ведёт инструмент вверх по стене и окрашивает её">
+            <rect x="372" y="20" width="228" height="342" fill="#1E242B"/>
+            <g stroke="#2A3038" stroke-width="1"><path d="M372 77H600M372 134H600M372 191H600M372 248H600M372 305H600M448 20V362M524 20V362"/></g>
+            <rect id="paint" x="375" y="330" width="225" height="32" fill="#E9EBE6"/>
+            <path d="M372 14V362" stroke="#FFFFFF" stroke-width="6"/>
+            <path d="M0 362H600" stroke="#3A414A" stroke-width="2"/>
+            <rect x="118" y="338" width="144" height="24" fill="#FFFFFF"/>
+            <circle cx="146" cy="368" r="11" fill="#5B636D"/><circle cx="234" cy="368" r="11" fill="#5B636D"/>
+            <line id="l1" x1="190" y1="338" x2="250" y2="190" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+            <line id="l2" x1="250" y1="190" x2="356" y2="250" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+            <circle id="jt" cx="250" cy="190" r="7" fill="#15181C"/>
+            <circle cx="190" cy="338" r="8" fill="#15181C"/>
+            <rect id="tool" x="350" y="238" width="22" height="24" fill="#C8F135"/>
+          </svg>
+          <div class="bar"><span>ДЕМО · МЕСТО ДЛЯ ВИДЕО С ОБЪЕКТА</span><span>ОКРАШЕНО <b id="pct">0 %</b></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="plates">
+      <div class="sig" style="color:var(--graphite)"><span class="lab">Работаем сейчас</span><h3>Окраска стен</h3><p>[N] м² окрашено · [N] объектов · [N] роботов</p></div>
+      <div style="background:var(--ink2)"><span class="lab">На подходе</span><h3>Шпаклевание и шлифование</h3><p class="mut">Запускаем по мере проверки технологии на объектах.</p></div>
+      <div class="white" style="color:var(--graphite)"><span class="lab" style="color:var(--steel)">Пилоты</span><h3>Ищем партнёров</h3><p><a href="#zastroyshchikam" style="font-weight:700">Условия для первых объектов →</a></p></div>
+    </div>
+  </section>
+
+  <section class="band light"><div class="wrap"><div class="split">
+    <div><span class="lab">Застройщикам и генподрядчикам</span><h2>Обычный субподряд. Только работают роботы</h2><p class="lead">Тот же договор, те же этапы и та же приёмка, что с любым отделочным подрядчиком. Технику, операторов и инженеров привозим мы.</p><div><a class="more" href="#zastroyshchikam">Подробнее об условиях →</a></div></div>
+    <div style="gap:.75rem">
+      <div class="card"><div class="tick"><div><h3>Не нужно покупать робота</h3><p class="mut">Вы платите за принятые квадратные метры.</p></div></div></div>
+      <div class="card"><div class="tick"><div><h3>Не нужно арендовать технику</h3><p class="mut">Никаких машино-смен и простоев за ваш счёт.</p></div></div></div>
+      <div class="card"><div class="tick"><div><h3>Не нужно обучать людей</h3><p class="mut">На объекте работает наша команда операторов.</p></div></div></div>
+    </div>
+  </div></div></section>
+
+  <section class="band dark" id="shagi"><div class="wrap">
+    <h2>От расчёта до акта</h2>
+    <div class="grid" style="gap:1.5rem">
+      <div class="step"><span class="n">01</span><h3>Расчёт</h3><p class="mut">Смотрим планировки и ведомость отделки, возвращаем цену за объём и график по этажам.</p></div>
+      <div class="step"><span class="n">02</span><h3>Мобилизация</h3><p class="mut">Привозим роботов и команду, сверяем модель с фактическим состоянием стен.</p></div>
+      <div class="step"><span class="n">03</span><h3>Работа</h3><p class="mut">Робот красит, оператор контролирует, инженер на связи. Вы видите прогресс по помещениям.</p></div>
+      <div class="step"><span class="n">04</span><h3>Приёмка</h3><p class="mut">Сдаём объём по акту. К акту — отчёт по каждому помещению с фотографиями.</p></div>
+    </div>
+  </div></section>
+
+  <section class="band stone"><div class="wrap">
+    <div class="head"><h2>Робот, софт и люди</h2><a class="more" href="#tehnologiya">Подробнее о технологии →</a></div>
+    <div class="grid">
+      <div class="card media"><div class="ph">[ФОТО РОБОТА НА ЭТАЖЕ]</div><div class="tx"><span class="lab">RF-[номер]</span><h3>Робот-маляр</h3><p class="mut">Промышленный манипулятор на мобильной платформе.</p></div></div>
+      <div class="card media"><div class="ph">[ЭКРАН ПРОГРАММЫ]</div><div class="tx"><span class="lab">ПО</span><h3>Цифровая модель этажа</h3><p class="mut">Строит маршрут по планировке и ведёт журнал работ.</p></div></div>
+      <div class="card media"><div class="ph">[ФОТО ОПЕРАТОРА]</div><div class="tx"><span class="lab">Команда</span><h3>Операторы и инженеры</h3><p class="mut">Наш оператор на каждом объекте, инженеры на связи всю смену.</p></div></div>
+    </div>
+  </div></section>
+
+  <section class="band light"><div class="wrap">
+    <h2>Объекты</h2>
+    <div class="grid">
+      <div class="card media"><div class="ph" style="background:var(--ink2)">[ВИДЕО С ОБЪЕКТА]</div><div class="tx"><span class="lab">Жилой комплекс · [город]</span><h3>[Название ЖК]</h3><p class="mut">Окраска стен, [N] м², для [застройщик].</p><span class="st">ПРИНЯТО</span></div></div>
+      <div class="card media"><div class="ph" style="background:var(--ink2)">[ВИДЕО С ОБЪЕКТА]</div><div class="tx"><span class="lab">Жилой комплекс · [город]</span><h3>[Название ЖК]</h3><p class="mut">Окраска стен, [N] м², для [застройщик].</p><span class="st w">В РАБОТЕ</span></div></div>
+      <div class="card" style="background:var(--graphite);color:var(--white);justify-content:space-between;gap:1.5rem;min-height:19rem"><span class="lab" style="color:var(--mute)">Следующий объект</span><h3 style="font-size:1.8rem">Здесь может быть ваш этаж</h3><div><button class="btn" type="button" data-scroll="zayavka">Обсудить пилот</button></div></div>
+    </div>
+    <div class="row lab" style="gap:.75rem 2rem;border-top:1px solid var(--rule);padding-top:1.5rem"><span>С нами работают:</span><span>[логотип]</span><span>[логотип]</span><span>[логотип]</span></div>
+  </div></section>
+
+  <section class="band white"><div class="wrap">
+    <h2>О нас пишут и мы пишем</h2>
+    <div class="grid" style="gap:1.5rem">
+      <div class="news"><span class="lab">[Издание] · [дата]</span><h3>[Заголовок публикации о компании]</h3></div>
+      <div class="news"><span class="lab">Статья · [дата]</span><h3>[Сколько стоит окраска этажа роботом и из чего складывается цена]</h3></div>
+      <div class="news"><span class="lab">Разбор · [дата]</span><h3>[Первый пилот: что получилось и что переделали]</h3></div>
+    </div>
+  </div></section>
+
+  <section class="band sig"><div class="wrap" style="padding-block:4rem;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between">
+    <div style="flex:1 1 24rem;display:flex;flex-direction:column;gap:.5rem"><span class="lab">Карьера</span><h2>Оператор строительного робота</h2><p style="font-size:1.05rem">Опыт в стройке не нужен, обучаем сами.</p></div>
+    <a class="btn ink" href="#kariera">Про работу оператора</a>
+  </div></section>
+</div>
+
+<!-- ЗАСТРОЙЩИКАМ -->
+<div class="view" data-view="zastroyshchikam" hidden>
+  <section class="band night hero"><div class="wrap">
+    <span class="lab">Застройщикам и генподрядчикам</span>
+    <h1 style="max-width:56rem">Дополнительная мощность по отделке — в формате субподряда</h1>
+    <p class="lead">Маляров не хватает, сроки сдачи не двигаются. Мы приходим на объект как подрядчик со своей техникой и командой и сдаём окраску по акту.</p>
+    <div class="row"><button class="btn" type="button" data-scroll="zayavka">Рассчитать объект</button></div>
+  </div></section>
+
+  <section class="band light"><div class="wrap"><div class="split">
+    <div><h2>Что входит в работу</h2>
+      <div class="tick"><p>Подготовка маршрутов робота по вашим планировкам</p></div>
+      <div class="tick"><p>Доставка, монтаж и вывоз техники</p></div>
+      <div class="tick"><p>Окраска стен: [число слоёв, тип краски — уточнить]</p></div>
+      <div class="tick"><p>Оператор на объекте и инженерная поддержка</p></div>
+      <div class="tick"><p>Отчёт по каждому помещению к акту приёмки</p></div>
+    </div>
+    <div><h2>Что нужно от площадки</h2>
+      <div class="card"><h3>Готовность основания</h3><p class="mut">Стены подготовлены под окраску: [требования к качеству поверхности].</p></div>
+      <div class="card"><h3>Электричество и доступ</h3><p class="mut">[Мощность и точки подключения], грузовой лифт или подъёмник.</p></div>
+      <div class="card"><h3>Свободный фронт работ</h3><p class="mut">Помещения освобождены от материалов и смежных бригад на время смены.</p></div>
+    </div>
+  </div></div></section>
+
+  <section class="band dark"><div class="wrap">
+    <h2>От расчёта до акта</h2>
+    <div class="grid" style="gap:1.5rem">
+      <div class="step"><span class="n">01</span><h3>Расчёт</h3><p class="mut">Цена за объём и график по этажам на основе ваших планировок.</p></div>
+      <div class="step"><span class="n">02</span><h3>Мобилизация</h3><p class="mut">Завозим технику, сверяем модель с фактическим состоянием стен.</p></div>
+      <div class="step"><span class="n">03</span><h3>Работа</h3><p class="mut">Робот красит, оператор контролирует, вы видите прогресс.</p></div>
+      <div class="step"><span class="n">04</span><h3>Приёмка</h3><p class="mut">Акт и отчёт по помещениям. Замечания устраняем до подписания.</p></div>
+    </div>
+  </div></section>
+
+  <section class="band stone"><div class="wrap">
+    <div><h2>Отчёт к акту приёмки</h2><p class="lead" style="margin-top:.75rem">Пример того, что вы получаете вместе с актом. Данные в таблице условные.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Помещение</th><th>Площадь стен</th><th>Слои</th><th>Фото</th><th>Статус</th></tr></thead>
+      <tbody>
+        <tr><td>Этаж 7 · кв. 61 · гостиная</td><td class="num">48,2 м²</td><td class="num">2</td><td class="num">6</td><td><span class="st">ПРИНЯТО</span></td></tr>
+        <tr><td>Этаж 7 · кв. 61 · спальня</td><td class="num">36,5 м²</td><td class="num">2</td><td class="num">4</td><td><span class="st">ПРИНЯТО</span></td></tr>
+        <tr><td>Этаж 7 · кв. 62 · гостиная</td><td class="num">51,0 м²</td><td class="num">1</td><td class="num">3</td><td><span class="st w">В РАБОТЕ</span></td></tr>
+        <tr><td>Этаж 7 · кв. 62 · коридор</td><td class="num">22,4 м²</td><td class="num">0</td><td class="num">0</td><td><span class="st p">В ПЛАНЕ</span></td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section class="band light"><div class="wrap">
+    <h2>Вопросы, которые нам задают на первой встрече</h2>
+    <div>
+      <details open><summary>А если сорвутся сроки?</summary><p>Срок и объём зафиксированы в договоре, как у обычного подрядчика. [Ваши условия ответственности за просрочку.]</p></details>
+      <details><summary>Робот справится с реальной стройкой?</summary><p>Пыль, неровные стены, площадка меняется каждый день. [Как техника с этим работает, плюс видео с объекта.]</p></details>
+      <details><summary>Кто отвечает за качество?</summary><p>Мы. Дефекты устраняем за свой счёт до подписания акта. [Гарантийный срок.]</p></details>
+      <details><summary>Что с углами, откосами и местами, куда робот не достаёт?</summary><p>[Кто и как доделывает такие участки и входит ли это в цену.]</p></details>
+      <details><summary>С какого объёма вам интересен объект?</summary><p>[Минимальная площадь или число этажей для выезда.]</p></details>
+    </div>
+  </div></section>
+</div>
+
+<!-- ТЕХНОЛОГИЯ -->
+<div class="view" data-view="tehnologiya" hidden>
+  <section class="band night hero"><div class="wrap">
+    <span class="lab">Технология</span>
+    <h1 style="max-width:54rem">Техника, которая работает на настоящей стройке</h1>
+    <p class="lead">Промышленный робот, программа, которая знает каждый этаж, и люди, которые отвечают за результат.</p>
+  </div></section>
+
+  <section class="band light"><div class="wrap">
+    <div class="split" style="align-items:center"><div class="ph" style="min-height:20rem">[ФОТО ИЛИ ВИДЕО РОБОТА В РАБОТЕ]</div>
+      <div><span class="lab">RF-[номер]</span><h2>Робот-маляр</h2><p class="lead">Манипулятор на мобильной платформе проезжает в стандартный дверной проём и красит стену на всю высоту этажа.</p>
+        <div class="tbl"><table style="min-width:0">
+          <tr><th>Производительность</th><td class="num">[N] м² в смену</td></tr>
+          <tr><th>Высота окраски</th><td class="num">до [N] м</td></tr>
+          <tr><th>Питание</th><td class="num">[параметры]</td></tr>
+          <tr><th>Габариты и масса</th><td class="num">[параметры]</td></tr>
+        </table></div>
+      </div></div>
+  </div></section>
+
+  <section class="band dark"><div class="wrap">
+    <h2>Как робот понимает, где красить</h2>
+    <div class="grid" style="gap:1.5rem">
+      <div class="step"><span class="n">01</span><h3>Модель этажа</h3><p class="mut">Загружаем планировки и получаем цифровую модель: стены, проёмы, высоты.</p></div>
+      <div class="step"><span class="n">02</span><h3>Сверка с фактом</h3><p class="mut">На месте робот сканирует помещение и подстраивает маршрут под реальные стены.</p></div>
+      <div class="step"><span class="n">03</span><h3>Журнал работ</h3><p class="mut">Программа записывает, что, где и когда окрашено. Из журнала собирается отчёт к акту.</p></div>
+    </div>
+  </div></section>
+
+  <section class="band stone"><div class="wrap"><div class="split">
+    <div><h2>Люди рядом с роботом</h2><p class="lead">Робот не работает один. На объекте всегда наш оператор, а инженерная группа следит за сменой удалённо.</p></div>
+    <div style="gap:.75rem">
+      <div class="card"><h3>Оператор</h3><p class="mut">Готовит помещение, заправляет краску, запускает и контролирует робота.</p></div>
+      <div class="card"><h3>Инженер</h3><p class="mut">Готовит маршруты, решает нештатные ситуации, отвечает за качество.</p></div>
+      <div class="card"><h3>Безопасность</h3><p class="mut">Зона работы робота ограждена и обозначена. [Сертификаты и допуски.]</p></div>
+    </div>
+  </div></div></section>
+</div>
+
+<!-- КАРЬЕРА -->
+<div class="view" data-view="kariera" hidden>
+  <section class="band night hero"><div class="wrap">
+    <span class="lab">Карьера</span>
+    <h1 style="max-width:52rem">Оператор строительного робота</h1>
+    <p class="lead">Физическая работа на стройке рядом с техникой. Опыт в строительстве не нужен: обучаем сами и платим за обучение. [Уточнить условия.]</p>
+    <div class="row"><button class="btn" type="button" data-scroll="zayavka">Откликнуться</button></div>
+  </div></section>
+
+  <section class="band light"><div class="wrap"><div class="split">
+    <div><h2>Честно о работе</h2>
+      <div class="tick"><p>Большая часть смены — руками: подготовить помещение, заправить краску, перевезти робота.</p></div>
+      <div class="tick"><p>Весь день на ногах, на этаже без отделки.</p></div>
+      <div class="tick"><p>Вы запускаете робота, следите за качеством и решаете, что делать, когда что-то идёт не по плану.</p></div>
+      <div class="tick"><p>Ваши замечания напрямую попадают к инженерам и меняют технику.</p></div>
+    </div>
+    <div><h2>Как проходит смена</h2>
+      <div class="card"><span class="lab">Примерный распорядок · время уточнить</span>
+        <dl class="day">
+          <dt>[08:00]</dt><dd>Планёрка: что красим сегодня и что изменилось на этаже.</dd>
+          <dt>[08:30]</dt><dd>Подготовка помещений, запуск и калибровка робота.</dd>
+          <dt>[12:00]</dt><dd>Обед.</dd>
+          <dt>[13:00]</dt><dd>Окраска, переезды между помещениями, контроль качества.</dd>
+          <dt>[16:30]</dt><dd>Уборка, обслуживание робота, отчёт за смену.</dd>
+        </dl>
+      </div>
+    </div>
+  </div></div></section>
+
+  <section class="band stone"><div class="wrap">
+    <h2>Что мы предлагаем</h2>
+    <div class="grid">
+      <div class="card"><span class="lab">График</span><h3>[N] дней в неделю</h3><p class="mut">Смены с [время] до [время].</p></div>
+      <div class="card"><span class="lab">Где</span><h3>Объекты в Москве и области</h3><p class="mut">[Компенсация проезда — уточнить.]</p></div>
+      <div class="card"><span class="lab">Оплата</span><h3>[Сумма] в месяц</h3><p class="mut">Спецодежда и обучение за счёт компании.</p></div>
+      <div class="card"><span class="lab">Опыт</span><h3>Не требуется</h3><p class="mut">Нужны руки, голова и интерес к технике.</p></div>
+    </div>
+  </div></section>
+</div>
+
+</main>
+
+<section class="band dark" id="zayavka"><div class="wrap"><div class="split">
+  <div><h2 id="ftitle">Расскажите про объект</h2><p class="lead" id="flead">Где строите и что нужно сделать. Оценим, подходит ли объём под нашу технику, и вернёмся с расчётом.</p><p class="lab" style="margin-top:.5rem">[Имя менеджера] · [телефон] · [почта]</p></div>
+  <div>
+    <form id="lead" novalidate>
+      <label>Имя<input id="f-name" name="name" type="text" autocomplete="name" required></label>
+      <label>Компания<input id="f-company" name="company" type="text" autocomplete="organization"></label>
+      <label>Телефон<input id="f-phone" name="phone" type="tel" autocomplete="tel" required></label>
+      <label>Почта<input id="f-email" name="email" type="email" autocomplete="email"></label>
+      <label class="full"><span id="fmsg">Объект и объём работ</span><textarea id="f-message" name="message" rows="4"></textarea></label>
+      <div class="full"><button class="btn" type="submit">Отправить</button></div>
+    </form>
+    <p id="err" role="alert" hidden style="color:var(--signal)">Укажите имя и телефон, чтобы мы могли связаться.</p>
+    <div id="sent" role="status" hidden><b>Форма заполнена верно.</b> Это демонстрационная версия сайта: заявка пока никуда не отправляется. В рабочей версии она уйдёт менеджеру.</div>
+  </div>
+</div></div></section>
+
+<footer><div class="wrap">
+  <a class="logo" href="#glavnaya" style="color:var(--white)"><svg aria-hidden="true"><use href="#mk"/></svg>РОБОФРЕЙМ</a>
+  <nav aria-label="Меню в подвале"><a href="#zastroyshchikam">Застройщикам</a><a href="#tehnologiya">Технология</a><a href="#kariera">Карьера</a></nav>
+  <span class="lab" style="color:var(--mute)">[Юрлицо] · [ИНН] · [год]</span>
+</div></footer>
+
+<script>
+(function(){
+  var views=[].slice.call(document.querySelectorAll('[data-view]'));
+  var names=views.map(function(v){return v.dataset.view});
+  var texts={kariera:['Откликнуться на вакансию','Оставьте контакты, расскажем про условия и пригласим на объект посмотреть на работу вживую.','Коротко о себе'],
+             _:['Расскажите про объект','Где строите и что нужно сделать. Оценим, подходит ли объём под нашу технику, и вернёмся с расчётом.','Объект и объём работ']};
+  function show(){
+    var h=(location.hash||'').replace('#','');
+    var cur=names.indexOf(h)>=0?h:'glavnaya';
+    views.forEach(function(v){v.hidden=v.dataset.view!==cur});
+    document.querySelectorAll('[data-nav]').forEach(function(a){
+      if(a.dataset.nav===cur)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    var t=texts[cur]||texts._;
+    document.getElementById('ftitle').textContent=t[0];
+    document.getElementById('flead').textContent=t[1];
+    document.getElementById('fmsg').textContent=t[2];
+    if(names.indexOf(h)>=0||!h)window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);show();
+
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-scroll]');if(!b)return;
+    var id=b.dataset.scroll,el=document.getElementById(id);
+    if(el&&el.closest('[hidden]')){location.hash='glavnaya';show();}
+    if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  });
+
+  var form=document.getElementById('lead'),sent=document.getElementById('sent'),err=document.getElementById('err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=form.name.value.trim()&&form.phone.value.trim();
+    err.hidden=!!ok;sent.hidden=!ok;
+    if(!ok)(form.name.value.trim()?form.phone:form.name).focus();
+  });
+
+  /* сцена: рука ведёт инструмент вверх по стене */
+  var B={x:190,y:338},L1=165,L2=175,TX=361;
+  var l1=document.getElementById('l1'),l2=document.getElementById('l2'),jt=document.getElementById('jt'),
+      tool=document.getElementById('tool'),paint=document.getElementById('paint'),pct=document.getElementById('pct');
+  function pose(ty){
+    var dx=TX-B.x,dy=ty-B.y,d=Math.min(Math.hypot(dx,dy),L1+L2-1),a=Math.atan2(dy,dx);
+    var c=(L1*L1+d*d-L2*L2)/(2*L1*d),ea=a-Math.acos(Math.max(-1,Math.min(1,c)));
+    var ex=B.x+L1*Math.cos(ea),ey=B.y+L1*Math.sin(ea);
+    l1.setAttribute('x2',ex);l1.setAttribute('y2',ey);
+    l2.setAttribute('x1',ex);l2.setAttribute('y1',ey);l2.setAttribute('x2',TX-4);l2.setAttribute('y2',ty);
+    jt.setAttribute('cx',ex);jt.setAttribute('cy',ey);
+    tool.setAttribute('y',ty-12);
+    var top=ty-12;paint.setAttribute('y',top);paint.setAttribute('height',Math.max(0,362-top));
+    pct.textContent=Math.round((330-ty)/270*100)+' %';
+  }
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){pose(160);return;}
+  var T=9000,t0=null;
+  function frame(ts){
+    if(t0===null)t0=ts;
+    var p=((ts-t0)%T)/T,k=Math.min(p/0.82,1);
+    k=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    paint.style.opacity=p>0.94?String((1-p)/0.06):'1';
+    pose(330-270*k);
+    requestAnimationFrame(frame);
+  }
+  pose(330);requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
