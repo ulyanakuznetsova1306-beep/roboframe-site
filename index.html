@@ -69,6 +69,10 @@ nav a{text-decoration:none;padding:.7rem 0;border-bottom:2px solid transparent}
 nav a[aria-current="page"]{border-bottom-color:var(--signal)}
 nav a:hover{border-bottom-color:var(--steel)}
 @media (max-width:40rem){header{position:static}header .btn{display:none}nav{margin-left:0;gap:0 1.1rem;font-size:.9rem}}
+.dirs{display:flex;flex-wrap:wrap;gap:2px}
+.dirs button{min-height:2.2rem;padding:.3rem .75rem;border:0;cursor:pointer;background:rgba(255,255,255,.1);color:#fff;font:500 .85rem var(--sans)}
+.dirs button[aria-pressed="true"]{background:var(--signal);color:var(--graphite);font-weight:700}
+#dnote{background:var(--signal);color:var(--graphite);font-weight:700;padding:.7rem 1rem}
 /* первый экран */
 .hero .wrap{padding-block:4.5rem 3.5rem}
 .hero .split{align-items:center}
@@ -124,12 +128,13 @@ footer nav{margin:0}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="mk" viewBox="0 0 100 100"><path d="M88 8V92" fill="none" stroke="currentColor" stroke-width="10"/><rect x="8" y="80" width="34" height="12" fill="currentColor"/><path d="M25 80L42 36L72 50" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/><rect x="69" y="43" width="14" height="14" fill="#C8F135"/></symbol>
+  <symbol id="mk" viewBox="0 0 100 100"><path d="M88 8V92" fill="none" stroke="currentColor" stroke-width="10"/><rect x="8" y="80" width="34" height="12" fill="currentColor"/><path d="M25 80L42 36L72 50" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/><rect x="69" y="43" width="14" height="14" style="fill:var(--signal)"/></symbol>
 </svg>
 
 <header>
   <div class="in">
     <a class="logo" href="#glavnaya"><svg role="img" aria-label="Робофрейм"><use href="#mk"/></svg>РОБОФРЕЙМ</a>
+    <div class="dirs" id="dirs" role="group" aria-label="Направление компании" hidden></div>
     <nav aria-label="Основное меню">
       <a href="#glavnaya" data-nav="glavnaya">Главная</a>
       <a href="#zastroyshchikam" data-nav="zastroyshchikam">Застройщикам</a>
@@ -148,9 +153,10 @@ footer nav{margin:0}
     <div class="wrap">
       <div class="split">
         <div style="flex:1.1 1 24rem;gap:1.5rem">
-          <span class="lab">Роботизированный подрядчик · Москва и область</span>
-          <h1>Отделку выполняют роботы. За результат отвечаем мы</h1>
-          <p class="lead">Вы принимаете объём работ по акту, а не арендуете технику. Стартовая операция — окраска стен.</p>
+          <p id="dnote" hidden>Пример: так сайт перестроится, когда откроется это направление. Тексты условные.</p>
+          <span class="lab" id="hl">Роботизированный подрядчик · Москва и область</span>
+          <h1 id="hh">Отделку выполняют роботы. За результат отвечаем мы</h1>
+          <p class="lead" id="hp">Вы принимаете объём работ по акту, а не арендуете технику. Стартовая операция — окраска стен.</p>
           <div class="row"><button class="btn" type="button" data-scroll="zayavka">Рассчитать объект</button><button class="btn ghost" type="button" data-scroll="shagi">Как это работает</button></div>
         </div>
         <div class="scene" style="gap:0">
@@ -166,7 +172,7 @@ footer nav{margin:0}
             <line id="l2" x1="250" y1="190" x2="356" y2="250" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
             <circle id="jt" cx="250" cy="190" r="7" fill="#15181C"/>
             <circle cx="190" cy="338" r="8" fill="#15181C"/>
-            <rect id="tool" x="350" y="238" width="22" height="24" fill="#C8F135"/>
+            <rect id="tool" x="350" y="238" width="22" height="24" style="fill:var(--signal)"/>
           </svg>
           <div class="bar"><span>ДЕМО · МЕСТО ДЛЯ ВИДЕО С ОБЪЕКТА</span><span>ОКРАШЕНО <b id="pct">0 %</b></span></div>
         </div>
@@ -388,6 +394,7 @@ footer nav{margin:0}
   </div>
 </div></div></section>
 
+<div class="band" style="background:#0C0E11;color:var(--mute);border-bottom:1px solid var(--line)"><div class="wrap" style="padding-block:1rem;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem"><span class="lab" style="color:var(--mute)">Демо для команды. На рабочем сайте этой полосы не будет: направления включаются в админке</span><button class="btn ghost" id="demo" type="button" aria-pressed="false">Показать будущие направления</button></div></div>
 <footer><div class="wrap">
   <a class="logo" href="#glavnaya" style="color:var(--white)"><svg aria-hidden="true"><use href="#mk"/></svg>РОБОФРЕЙМ</a>
   <nav aria-label="Меню в подвале"><a href="#zastroyshchikam">Застройщикам</a><a href="#tehnologiya">Технология</a><a href="#kariera">Карьера</a></nav>
@@ -421,6 +428,30 @@ footer nav{margin:0}
     if(el&&el.closest('[hidden]')){location.hash='glavnaya';show();}
     if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
   });
+
+  /* направления: на старте одно, переключатель скрыт */
+  var DIRS={stroy:{n:'Строй',c:'#C8F135'},bas:{n:'Беспилотные',c:'#B7A6FF',l:'Беспилотные системы',h:'[Заголовок направления «Беспилотные системы»]'},agro:{n:'Агро',c:'#7BDB73',l:'Агро',h:'[Заголовок направления «Агро»]'},med:{n:'Мед',c:'#4FD3EA',l:'Мед',h:'[Заголовок направления «Мед»]'}};
+  var dirs=document.getElementById('dirs'),demo=document.getElementById('demo'),hl=document.getElementById('hl'),hh=document.getElementById('hh'),hp=document.getElementById('hp'),dnote=document.getElementById('dnote');
+  var base={l:hl.textContent,h:hh.textContent,p:hp.textContent};
+  dirs.innerHTML=Object.keys(DIRS).map(function(k){return '<button type="button" data-dir="'+k+'">'+DIRS[k].n+'</button>';}).join('');
+  function setDir(k){
+    var d=DIRS[k],first=k==='stroy';
+    document.documentElement.style.setProperty('--signal',d.c);
+    dirs.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dir===k));});
+    hl.textContent=first?base.l:'Робофрейм · '+d.l;
+    hh.textContent=first?base.h:d.h;
+    hp.textContent=first?base.p:'Здесь будут свои тексты, объекты и форма заявки этого направления.';
+    dnote.hidden=first;
+    if(!first&&location.hash&&location.hash!=='#glavnaya'){location.hash='glavnaya';}
+    if(!first)window.scrollTo(0,0);
+  }
+  dirs.addEventListener('click',function(e){var b=e.target.closest('[data-dir]');if(b)setDir(b.dataset.dir);});
+  demo.addEventListener('click',function(){
+    var on=dirs.hidden;dirs.hidden=!on;demo.setAttribute('aria-pressed',String(on));
+    demo.textContent=on?'Скрыть будущие направления':'Показать будущие направления';
+    setDir('stroy');if(on)window.scrollTo(0,0);
+  });
+  setDir('stroy');
 
   var form=document.getElementById('lead'),sent=document.getElementById('sent'),err=document.getElementById('err');
   form.addEventListener('submit',function(e){
